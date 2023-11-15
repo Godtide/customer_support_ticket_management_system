@@ -74,7 +74,7 @@ export function validateRoleAndNotRole(role: string, notRole: boolean) {
  if(userRole !== Roles.Admin as string 
   || userRole !== Roles.Customer as string
   || userRole !== Roles.SupportAgent as string)
-  return res.status(403).json({ error: true, message: `Forbidden: Only ${userRole} users can perform this action.` });
+  return res.status(403).json({ error: true, message: `Forbidden: Only users with specific user role can perform this action.` });
         next();
     } catch (error) {
       next(error);
