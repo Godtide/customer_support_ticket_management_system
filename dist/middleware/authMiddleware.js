@@ -17,12 +17,12 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../config");
 const User_1 = __importDefault(require("../model/User"));
 const UserService_1 = require("../services/UserService");
-var Token;
-(function (Token) {
-    Token["Customer"] = "Customer";
-    Token["SupportAgent"] = "SupportAgent";
-    Token["Admin"] = "Admin";
-})(Token || (Token = {}));
+var Roles;
+(function (Roles) {
+    Roles["Customer"] = "Customer";
+    Roles["SupportAgent"] = "SupportAgent";
+    Roles["Admin"] = "Admin";
+})(Roles || (Roles = {}));
 function authTokenValidator(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         const userModel = new User_1.default();
@@ -57,7 +57,7 @@ function validateIsAdmin(req, res, next) {
             if (!userRole) {
                 return res.status(401).json({ error: true, message: 'Unauthorized: User role not found.' });
             }
-            if (userRole.toString() !== Token.Admin) {
+            if (userRole.toString() !== Roles.Admin) {
                 return res.status(403).json({ error: true, message: 'Forbidden: Only Admin users can perform this action.' });
             }
             next();
@@ -76,6 +76,10 @@ function validateRoleAndNotRole(role, notRole) {
             if (!userRole) {
                 return res.status(401).json({ error: true, message: 'Unauthorized: User role not found.' });
             }
+            if (userRole !== Roles.Admin
+                || userRole !== Roles.Customer
+                || userRole !== Roles.SupportAgent)
+                return res.status(403).json({ error: true, message: `Forbidden: Only ${userRole} users can perform this action.` });
             next();
         }
         catch (error) {

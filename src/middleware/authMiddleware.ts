@@ -64,16 +64,6 @@ export async function validateIsAdmin(req: Request, res: Response, next: NextFun
 }
 
 
-// Function to check if a string is not in the enum
-function isStringNotInEnum(value: string, enumObject: Roles) {
-  // for (const key in enumObject as any ) {
-    if (  enumObject[`${value}`] === value                ) {
-      return false; // String is found in the enum
-    // }
-  }
-  return true; // String is not found in the enum
-}
-
 export function validateRoleAndNotRole(role: string, notRole: boolean) {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {

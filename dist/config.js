@@ -11,7 +11,7 @@ exports.JWT_SECRET = process.env.JWT_SECRET || 'default_jwt_secret';
 exports.JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || 60;
 exports.REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || 'default_refresh_token_secret';
 exports.REFRESH_TOKEN_EXPIRES_IN = process.env.REFRESH_TOKEN_EXPIRES_IN || '20h';
-exports.PORT = process.env.PORT || 5000;
+exports.PORT = process.env.PORT || 3000;
 exports.swaggerOptions = {
     definition: {
         openapi: '3.0.0',
